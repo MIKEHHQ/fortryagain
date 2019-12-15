@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="/style/upload.css">
+</head>
+<body>
+    <div class="title">
+        <button id="back" onclick="backup()">&lt;</button>
+    </div>
+    <div id="container"></div>
+    <form
+      action="http://47.101.139.221:8080/photo_gallery/upload"
+      method="POST"
+      enctype="multipart/form-data"
+      target="prevent"
+      id="form"
+    >
+      <input type="file" accept="img/jpg, img/jpeg, img/png, img/jfif, img/gif, img/svg" id="file" name="img" onchange="preview(this)"/><br>
+      <textarea type="text" id="des" placeholder="请输入图片说明，不要超过100字" name="details" maxlength="100"></textarea><br>
+      <input type="checkbox" class="check" name="labels_id" value="001" id="001">
+      <label class="label" id="zx" onclick="zx()"><p>中心校区</p></label>
+      <input type="checkbox" class="check" name="labels_id" value="002" id="002">
+      <label class="label" id="rjy" onclick="rjy()"><p>软件园校区</p></label>
+      <input type="checkbox" class="check" name="labels_id" value="003" id="003">
+      <label class="label" id="hjl" onclick="hjl()"><p>洪家楼校区</p></label>
+      <input type="checkbox" class="check" name="labels_id" value="004" id="004">
+      <label class="label" id="xls" onclick="xls()"><p>兴隆山校区</p></label>
+      <input type="checkbox" class="check" name="labels_id" value="005" id="005">
+      <label class="label" id="btq" onclick="btq()"><p>趵突泉校区</p></label>
+      <input type="checkbox" class="check" name="labels_id" value="006" id="006">
+      <label class="label" id="qfs" onclick="qfs()"><p>千佛山校区</p></label>
+      <input type="checkbox" class="check" name="labels_id" value="007" id="007">
+      <label class="label" id="wh" onclick="wh()"><p>威海校区</p></label>
+      <input type="checkbox" class="check" name="labels_id" value="008" id="008">
+      <label class="label" id="qd" onclick="qd()"><p>青岛校区</p></label>
+      <input type="checkbox" class="check" name="labels_id" value="009" id="009">
+      <label class="label" id="dt" onclick="dt()"><p>冬天</p></label>
+      <input type="text" id="user" placeholder="请输入用户" name="user_id"/>
+      <input type="file" name="ex_img">
+      <input type="submit" value="上&nbsp;&nbsp;传" id="btn"></input>
+    </form>
+    <iframe name="prevent" style="display: none;"></iframe>
+    <div id="box"></div>
+    <img src="./upload.jpg" alt="" id="upPic">
+    <img src="" alt="" id="img">
+    <script>
+      function backup() {
+        window.history.back(-1);
+      }
+        function preview(obj) {
+            var file=$(obj)[0].files[0];    //获取文件信息
+            var imgdata='';
+                var reader=new FileReader();  //调用FileReader
+                reader.readAsDataURL(file); //将文件读取为 DataURL(base64)
+                reader.onload=function(evt){   //读取操作完成时触发。
+                    $("#img").attr('src',evt.target.result)  //将img标签的src绑定为DataURL
+                };
+        var upload = document.getElementById("upPic");
+        upload.style.display = "none";
+        }
+        
+        var box = document.getElementById("box");
+        var choice = 0;
+
+        function zx(){
+          if (choice < 2){
+          choice++;
+          document.getElementById("001").checked = true;
+          var newLabel = document.createElement("label");
+          newLabel.className = "newLabel";
+          newLabel.id = "zxlab";
+          var newP = document.createElement("p")
+          newP.className = "newP";
+          box.appendChild(newLabel);
+          newLabel.appendChild(newP);
+          newLabel.innerText = "中心校区"
+          newLabel.onclick = function(){
+            choice--;
+            document.getElementById("001").checked = false;
+            box.removeChild(newLabel);
+          }
+        } else {
+          alert("最多选择两个标签");
+        }
+        }
+        function rjy(){
+          if (choice < 2){
+          choice++
+          document.getElementById("002").checked = true;
+          var newLabel = document.createElement("label");
+          newLabel.className = "newLabel";
+          newLabel.id = "rjylab";
+          var newP = document.createElement("p")
+          newP.className = "newP";
+          box.appendChild(newLabel);
+          newLabel.appendChild(newP);
+          newLabel.innerText = "软件园校区"
+          newLabel.onclick = function(){
+            choice--;
+            document.getElementById("002").checked = false;
+            box.removeChild(newLabel);
+          }
+        }else {
+          alert("最多选择两个标签");
+        }
+        }
+        function hjl(){
+          if (choice < 2){
+          choice++;
+          document.getElementById("003").checked = true;
+          var newLabel = document.createElement("label");
+          newLabel.className = "newLabel";
+          newLabel.id = "hjllab";
+          var newP = document.createElement("p")
+          newP.className = "newP";
+          box.appendChild(newLabel);
+          newLabel.appendChild(newP);
+          newLabel.innerText = "洪家楼校区"
+          newLabel.onclick = function(){
+            choice--;
+            document.getElementById("003").checked = false;
+            box.removeChild(newLabel);
+          }
+        }else {
+          alert("最多选择两个标签");
+        }
+        }
+        function xls(){
+          if (choice < 2){
+          choice++;
+          document.getElementById("004").checked = true;
+          var newLabel = document.createElement("label");
+          newLabel.className = "newLabel";
+          newLabel.id = "xlslab";
+          var newP = document.createElement("p")
+          newP.className = "newP";
+          box.appendChild(newLabel);
+          newLabel.appendChild(newP);
+          newLabel.innerText = "兴隆山校区"
+          newLabel.onclick = function(){
+            choice--;
+            document.getElementById("004").checked = false;
+            box.removeChild(newLabel);
+          }
+        }else {
+          alert("最多选择两个标签");
+        }
+        }
+        function btq(){
+          if (choice < 2){
+          choice++;
+          document.getElementById("005").checked = true;
+          var newLabel = document.createElement("label");
+          newLabel.className = "newLabel";
+          newLabel.id = "btqlab";
+          var newP = document.createElement("p")
+          newP.className = "newP";
+          box.appendChild(newLabel);
+          newLabel.appendChild(newP);
+          newLabel.innerText = "趵突泉校区"
+          newLabel.onclick = function(){
+            choice--;
+            document.getElementById("005").checked = false;
+            box.removeChild(newLabel);
+          }
+        }else {
+          alert("最多选择两个标签");
+        }
+        }
+        function qfs(){
+          if (choice < 2){
+          choice++;
+          document.getElementById("006").checked = true;
+          var newLabel = document.createElement("label");
+          newLabel.className = "newLabel";
+          newLabel.id = "qfslab";
+          var newP = document.createElement("p")
+          newP.className = "newP";
+          box.appendChild(newLabel);
+          newLabel.appendChild(newP);
+          newLabel.innerText = "千佛山校区"
+          newLabel.onclick = function(){
+            choice--;
+            document.getElementById("006").checked = false;
+            box.removeChild(newLabel);
+          }
+        }else {
+          alert("最多选择两个标签");
+        }
+        }
+        function wh(){
+          if (choice < 2){
+          choice++;
+          document.getElementById("007").checked = true;
+          var newLabel = document.createElement("label");
+          newLabel.className = "newLabel";
+          newLabel.id = "whlab";
+          var newP = document.createElement("p")
+          newP.className = "newP";
+          box.appendChild(newLabel);
+          newLabel.appendChild(newP);
+          newLabel.innerText = "威海校区"
+          newLabel.onclick = function(){
+            choice--;
+            document.getElementById("007").checked = false;
+            box.removeChild(newLabel);
+          }
+        }else {
+          alert("最多选择两个标签");
+        }
+        }
+        function qd(){
+          if (choice < 2){
+          choice++;
+          document.getElementById("008").checked = true;
+          var newLabel = document.createElement("label");
+          newLabel.className = "newLabel";
+          newLabel.id = "qdlab";
+          var newP = document.createElement("p")
+          newP.className = "newP";
+          box.appendChild(newLabel);
+          newLabel.appendChild(newP);
+          newLabel.innerText = "青岛校区"
+          newLabel.onclick = function(){
+            choice--;
+            document.getElementById("008").checked = false;
+            box.removeChild(newLabel);
+          }
+        }else {
+          alert("最多选择两个标签");
+        }
+        }
+        function dt(){
+          if (choice < 2){
+          choice++;
+          document.getElementById("009").checked = true;
+          var newLabel = document.createElement("label");
+          newLabel.className = "newLabel";
+          newLabel.id = "dtlab";
+          var newP = document.createElement("p")
+          newP.className = "newP";
+          box.appendChild(newLabel);
+          newLabel.appendChild(newP);
+          newLabel.innerText = "冬天"
+          newLabel.onclick = function(){
+            choice--;
+            document.getElementById("009").checked = false;
+            box.removeChild(newLabel);
+          }
+        }else {
+          alert("最多选择两个标签");
+        }
+        } 
+    </script>
+</body>
+</html>

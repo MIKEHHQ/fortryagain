@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/style/search.css">
+    <title>搜索标签</title>
+
+    <script>
+        function backup(){
+            window.history.back(-1);
+        }
+        function clear(){
+            var input = document.getElementById("labs");
+            input.value=null;
+
+            var rjy = document.getElementById("rjy");
+            var zx = document.getElementById("zx");
+            var qfs = document.getElementById("qfs");
+            var btq = document.getElementById("btq");
+            var hjl = document.getElementById("hjl");
+            var xls = document.getElementById("xls");
+
+            
+            rjy.style.display="none";
+            zx.style.display="none";
+            qfs.style.display="none";
+            hjl.style.display="none";
+            btq.style.display="none";
+            xls.style.display="none";
+        }
+        function searchin(){
+            var inputer = document.getElementById("labs");
+            var val = inputer.value;
+            var inner = val;
+
+            var _rjy = document.getElementById("软件园校区");
+            var rjyid = _rjy.id;
+            var rjy = document.getElementById("rjy");
+            var _zx = document.getElementById("中心校区");
+            var zxid = _zx.id;
+            var zx = document.getElementById("zx");
+            var _qfs = document.getElementById("千佛山校区");
+            var qfsid = _qfs.id;
+            var qfs = document.getElementById("qfs");
+            var _btq = document.getElementById("趵突泉校区");
+            var btqid = _btq.id;
+            var btq = document.getElementById("btq");
+            var _hjl = document.getElementById("洪家楼校区");
+            var hjlid = _hjl.id;
+            var hjl = document.getElementById("hjl");
+            var _xls = document.getElementById("兴隆山校区");
+            var xlsid = _xls.id;
+            var xls = document.getElementById("xls");
+            var _qd = document.getElementById("青岛校区");
+            var qdid = _qd.id;
+            var qd = document.getElementById("qd");
+            var _wh = document.getElementById("威海校区");
+            var whid = _wh.id;
+            var wh = document.getElementById("wh");
+            var _dt = document.getElementById("冬天");
+            var dtid = _dt.id;
+            var dt = document.getElementById("dt");
+
+            
+            rjy.style.display="none";
+            zx.style.display="none";
+            qfs.style.display="none";
+            hjl.style.display="none";
+            btq.style.display="none";
+            xls.style.display="none";
+            qd.style.display="none";
+            wh.style.display="none";
+            dt.style.display="none";
+            
+
+            if(rjyid.search(inner)>=0){
+                rjy.style.display="block";
+            }
+            if(zxid.search(inner)>=0){
+                zx.style.display="block";
+            }
+            if(qfsid.search(inner)>=0){
+                qfs.style.display="block";
+            }
+            if(hjlid.search(inner)>=0){
+                hjl.style.display="block";
+            }
+            if(btqid.search(inner)>=0){
+                btq.style.display="block";
+            }
+            if(xlsid.search(inner)>=0){
+                xls.style.display="block";
+            }
+            if(qdid.search(inner)>=0){
+                qd.style.display="block";
+            }
+            if(whid.search(inner)>=0){
+                wh.style.display="block";
+            }
+            if(dtid.search(inner)>=0){
+                dt.style.display="block";
+            }
+            if(rjyid.search(inner)==-1&&zxid.search(inner)==-1&&qfsid.search(inner)==-1&&hjlid.search(inner)==-1&&btqid.search(inner)==-1&&xlsid.search(inner)==-1&&qdid.search(inner)==-1&&whid.search(inner)==-1&&dtid.search(inner)==-1){
+                alert("无查询结果，请再次查询");
+            }
+            
+        }
+        function rjy(){
+            window.location.href="软件园.html";
+        }
+        function zx(){
+            window.location.href="中心.html";
+        }
+        function qfs(){
+            window.location.href="千佛山.html";
+        }
+        function hjl(){
+            window.location.href="洪家楼.html";
+        }
+        function btq(){
+            window.location.href="趵突泉.html";
+        }
+        function xls(){
+            window.location.href="兴隆山.html";
+        }
+        function qd() {
+            window.location.href = "青岛.html";
+        }
+        function wh() {
+            window.location.href = "威海.html";
+        }
+        function dt() {
+            window.location.href = "冬天.html";
+        }
+
+        document.onkeydown = function (e) {
+            var theEvent = window.event || e;
+            var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+            if (code == 13) {
+                searchin();
+            }
+        }
+    </script>
+</head>
+<body>
+    <img id="wallpaper" src="./background.jpg">
+    <form class="input" onsubmit="return false;">
+        <input type="button" onclick="backup()" value='&lt;' id="btn">
+        <input id="labs" type="text" onclick="clear()">
+        <input type="button" id="search" onclick="searchin()" value="搜&nbsp;索">
+    </form>
+
+<div class="labels">
+    <div class="block" id="rjy">
+        <button class="tip" onclick="rjy()" id="软件园校区">软件园校区</button>
+    </div>
+    <div class="block" id="zx">
+        <button class="tip" onclick="zx()" id="中心校区">中心校区</button>
+    </div>
+    <div class="block" id="qfs">
+        <button class="tip" onclick="qfs()" id="千佛山校区">千佛山校区</button>
+    </div>
+    <div class="block" id="hjl">
+        <button class="tip" onclick="hjl()" id="洪家楼校区">洪家楼校区</button>
+    </div>
+    <div class="block" id="btq">
+        <button class="tip" onclick="btq()" id="趵突泉校区">趵突泉校区</button>
+    </div>
+    <div class="block" id="xls">
+        <button class="tip" onclick="xls()" id="兴隆山校区">兴隆山校区</button>
+    </div>
+    <div class="block" id="qd">
+        <button class="tip" onclick="qd()" id="青岛校区">青岛校区</button>
+    </div>
+    <div class="block" id="wh">
+        <button class="tip" onclick="wh()" id="威海校区">威海校区</button>
+    </div>
+    <div class="block" id="dt">
+        <button class="tip" onclick="dt()" id="冬天">冬天</button>
+    </div>
+    </div>
+</div>
+</body>
+</html>

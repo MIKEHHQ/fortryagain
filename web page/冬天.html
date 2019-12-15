@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/style/labels.css" />
+    <script src="../js source/jq source/jquery.min.js"></script>
+    <script src="../js source/jq source/jquery.mobile-1.4.5.min.js"></script>
+    <title>冬天</title>
+  </head>
+  <body>
+    <img src="./background.jpg" id="wallpaper" />
+    <form class="input">
+      <button id="btn" onclick="backup()">&lt;</button>
+      <h1 id="lab">冬天</h1>
+    </form>
+
+    <ul id="box"></ul>
+    <div id="mySidenav" class="sidenav">
+      <a href="index.html" onclick="index()">首页</a>
+      <a href="软件园.html" onclick="rjy()">软件园校区</a>
+      <a href="中心.html" onclick="zx()">中心校区</a>
+      <a href="千佛山.html" onclick="qfs()">千佛山校区</a>
+      <a href="洪家楼.html" onclick="hjl()">洪家楼校区</a>
+      <a href="趵突泉.html" onclick="btq()">趵突泉校区</a>
+      <a href="兴隆山.html" onclick="xls()">兴隆山校区</a>
+      <a href="青岛.html" onclick="qd()">青岛校区</a>
+      <a href="威海.html" onclick="wh()">威海校区</a>
+      <a href="冬天.html" onclick="dt()">冬天</a>
+    </div>
+
+    <script>
+      $(document).ready(function() {
+        if (location.href.indexOf("#reloaded") == -1) {
+          location.href = location.href + "#reloaded";
+          location.reload();
+        }
+      });
+
+      function backup() {
+        window.location.href = "index.html";
+      }
+
+      $(document).ready(function() {
+        fetch("http://47.101.139.221:8080/photo_gallery/showAll") // 返回一个Promise对象
+          .then(result => {
+            return result.json(); // result.json()是一个Promise对象
+          })
+          .then(data => {
+            console.log(data);
+            if (data.code == -1) {
+              alert("error");
+            } else {
+              var length = data.data[0].length + data.data[1].length;
+              var picnum = 1;
+              var zero = 0;
+              var one = 0;
+              var zerolength = data.data[0].length;
+              var lis = document.getElementsByTagName("li");
+              var leng = lis.length;
+              var box = document.getElementById("box");
+              for (; picnum <= length; picnum++) {
+                var num = String(picnum);
+
+                if (picnum > leng) {
+                  var newLi = document.createElement("li");
+                  var newImg = document.createElement("img");
+
+                  newLi.id = "li" + num;
+                  newImg.id = "p" + num;
+                  newImg.style.width = "31%";
+                  newImg.style.height = "105.95px";
+                  newImg.style.margin = "3px";
+
+                  newImg.src = "";
+                  newLi.appendChild(newImg);
+
+                  box.appendChild(newLi);
+                }
+                if (zero < zerolength) {
+                  document.getElementById("p" + num).name =
+                    data.data[0][zero].labels;
+                  document.getElementById("p" + num).src =
+                    data.data[0][zero].url;
+
+                  var school = (document.getElementById("li" + num).name =
+                    data.data[0][zero].labels);
+
+                  document.getElementById("p" + String(picnum)).name =
+                    data.data[0][zero].labels;
+                  document.getElementById("p" + String(picnum)).praise =
+                    data.data[0][zero].praise;
+                  document.getElementById("p" + String(picnum)).src =
+                    data.data[0][zero].url;
+                  document.getElementById("p" + String(picnum)).url =
+                    data.data[0][zero].url;
+                  document.getElementById("p" + String(picnum)).des =
+                    data.data[0][zero].details;
+                  document.getElementById("p" + String(picnum)).userid =
+                    data.data[0][zero].userId;
+
+                  zero++;
+                } else {
+                  document.getElementById("p" + num).name =
+                    data.data[1][one].labels;
+                  document.getElementById("p" + num).src =
+                    data.data[1][one].url;
+
+                  var school = (document.getElementById("li" + num).name =
+                    data.data[1][one].labels);
+
+                  document.getElementById("p" + String(picnum)).name =
+                    data.data[1][one].labels;
+                  document.getElementById("p" + String(picnum)).praise =
+                    data.data[1][one].praise;
+                  document.getElementById("p" + String(picnum)).src =
+                    data.data[1][one].url;
+                  document.getElementById("p" + String(picnum)).url =
+                    data.data[1][one].exUrl;
+                  document.getElementById("p" + String(picnum)).des =
+                    data.data[1][one].details;
+                  document.getElementById("p" + String(picnum)).userid =
+                    data.data[1][one].userId;
+
+                  one++;
+                }
+                if (school != "冬天") {
+                  document.getElementById("li" + num).style.display = "none";
+                }
+
+                newImg.onclick = function() {
+                  var newDiv = document.createElement("div");
+                  newDiv.className = "mark";
+                  box.appendChild(newDiv);
+                  var wallpaper = document.createElement("img");
+                  wallpaper.className = "wallpaper";
+                  wallpaper.src = "./background.jpg";
+                  newDiv.appendChild(wallpaper);
+                  var wallpaper = document.createElement("img");
+                  wallpaper.className = "wallpaper";
+                  newDiv.appendChild(wallpaper);
+                  var newPic = document.createElement("img");
+                  newPic.className = "pic";
+                  newPic.src = this.url;
+                  var newHr = document.createElement("hr");
+                  newHr.className = "hr";
+                  var newSpan = document.createElement("span");
+                  newSpan.className = "span";
+                  newSpan.innerHTML = "<";
+                  newHr.appendChild(newSpan);
+                  box.appendChild(newHr);
+
+                  var anotherDiv = document.createElement("div");
+                  anotherDiv.className = "labContainer";
+                  box.appendChild(anotherDiv);
+                  var innerLab = String(this.name);
+                  var arr = innerLab.split(",");
+                  var label_num = arr.length;
+                  for (var i = 0; i < label_num; i++) {
+                    var newLabel = document.createElement("span");
+                    newLabel.className = "labs";
+                    newLabel.innerHTML = arr[i];
+                    anotherDiv.appendChild(newLabel);
+                  }
+                  //点赞按钮部分
+                  var heart = document.createElement("span");
+                  heart.className = "heart";
+                  anotherDiv.appendChild(heart);
+                  var inheart = document.createElement("span");
+                  inheart.className = "inheart";
+                  anotherDiv.appendChild(inheart);
+                  var praise = document.createElement("praise");
+                  praise.className = "praise";
+                  var praiser = parseInt(this.praise);
+                  if (praiser < 1000) praise.innerHTML = this.praise;
+                  else praise.innerHTML = "999+";
+                  anotherDiv.appendChild(praise);
+                  var chest = document.createElement("span");
+                  chest.className = "chest";
+                  anotherDiv.appendChild(chest);
+                  var fake_chest = document.createElement("span");
+                  fake_chest.className = "_chest";
+                  anotherDiv.appendChild(fake_chest);
+                  //点赞功能
+                  fake_chest.onclick = function() {
+                    var liked = document.createElement("span");
+                    liked.className = "liked";
+                    anotherDiv.appendChild(liked);
+                    var praisers = String(praiser + 1);
+                    if (praiser + 1 < 1000) praise.innerHTML = praisers;
+                    else praise.innerHTML = "999+";
+                    var anotherChest = document.createElement("span");
+                    anotherChest.className = "yesPraised";
+                    anotherDiv.appendChild(anotherChest);
+                    anotherChest.onclick = function() {
+                      if (praiser < 1000) praise.innerHTML = String(praiser);
+                      else praise.innerHTML = "999+";
+                      anotherDiv.removeChild(liked);
+                      anotherDiv.removeChild(anotherChest);
+                    };
+                  };
+
+                  var newDes = document.createElement("des");
+                  newDes.className = "des";
+                  newDes.innerHTML = this.des;
+                  var newUser = document.createElement("user");
+                  newUser.innerText = "上传者：" + this.userid;
+                  newUser.className = "userid";
+                  box.appendChild(newUser);
+                  box.appendChild(newDes);
+                  box.appendChild(newPic);
+                  newLabel.onclick = function() {
+                    var area = newLabel.innerText;
+                    if (area == "中心") {
+                      window.location.href = "中心.html";
+                    } else if (area == "软件") {
+                      window.location.href = "软件园.html";
+                    } else if (area == "洪楼") {
+                      window.location.href = "洪家楼.html";
+                    } else if (area == "兴隆山") {
+                      window.location.href = "兴隆山.html";
+                    } else if (area == "趵突泉") {
+                      window.location.href = "趵突泉.html";
+                    } else if (area == "千佛山") {
+                      window.location.href = "千佛山.html";
+                    } else if (area == "威海") {
+                      window.location.href = "威海.html";
+                    } else if (area == "青岛") {
+                      window.location.href = "青岛.html";
+                    } else if (area == "冬天") {
+                      window.location.href = "冬天.html";
+                    }
+                  };
+                  newSpan.onclick = function() {
+                    box.removeChild(newPic);
+                    box.removeChild(newDiv);
+                    box.removeChild(newHr);
+                    box.removeChild(newDes);
+                    box.removeChild(newUser);
+                    box.removeChild(anotherDiv);
+                  };
+                }; //点击图片进入fake网页
+              }
+            }
+          });
+      });
+
+      $(document).ready(function() {
+        $("html").swiperight(function() {
+          $(".sidenav").width(200);
+        });
+      });
+
+      $(document).ready(function() {
+        $("html").swipeleft(function() {
+          $(".sidenav").width(0);
+        });
+      });
+
+      function index() {
+        window.location.href = "index.html";
+      }
+      function rjy() {
+        window.location.href = "软件园.html";
+      }
+      function zx() {
+        window.location.href = "中心.html";
+      }
+      function qfs() {
+        window.location.href = "千佛山.html";
+      }
+      function hjl() {
+        window.location.href = "洪家楼.html";
+      }
+      function btq() {
+        window.location.href = "趵突泉.html";
+      }
+      function xls() {
+        window.location.href = "兴隆山.html";
+      }
+      function qd() {
+        window.location.href = "青岛.html";
+      }
+      function wh() {
+        window.location.href = "威海.html";
+      }
+      function dt() {
+        window.location.href = "冬天.html";
+      }
+    </script>
+  </body>
+</html>
